@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Character, Info } from "../globals/interfaces";
+import { Character, Info } from "../../interfaces";
 import type { RootState } from "../stores/characterStore";
 
 // Define a type for the slice state
@@ -12,22 +12,22 @@ const initialState: CharactersState = {
   characters: [] as Info<Character[]>,
 };
 
-export const getCharacterSlice = createSlice({
-  name: "getAllCharacterResults",
+export const charactersPerPage = createSlice({
+  name: "getCharactersForPage",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    getData: (state, action: PayloadAction<Info<Character[]>>) => {
+    setCharactersForPage: (state, action: PayloadAction<Info<Character[]>>) => {
       state.characters = action.payload;
     },
   },
 });
 
-export const { getData } = getCharacterSlice.actions;
+export const { setCharactersForPage } = charactersPerPage.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectAllCharacters = (state: RootState) =>
-  state.getAllCharacterResults.characters;
+  state.getCharactersPerPage.characters;
 
-export default getCharacterSlice.reducer;
+export default charactersPerPage.reducer;

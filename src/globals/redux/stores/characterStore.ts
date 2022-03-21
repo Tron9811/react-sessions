@@ -1,19 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { charactersApi } from "../slices/characterApiSlice";
-import getCharacterSlice from "../slices/getCharacterSlice";
+import { pagedCharactersApi } from "../../../services/characterApi";
+import charactersPerPage from "../reducers/characterReducer";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
-    [charactersApi.reducerPath]: charactersApi.reducer,
-    getAllCharacterResults: getCharacterSlice,
+    [pagedCharactersApi.reducerPath]: pagedCharactersApi.reducer,
+    getCharactersPerPage: charactersPerPage,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(charactersApi.middleware),
+    getDefaultMiddleware().concat(pagedCharactersApi.middleware),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

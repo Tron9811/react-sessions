@@ -7,11 +7,10 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { useAppSelector } from "../../globals/hooks";
-import React from "react";
 
 const CharacterDisplay = (): JSX.Element => {
   const getCharacters: Info<Character[]> = useAppSelector(
-    (state) => state.getAllCharacterResults.characters
+    (state) => state.getCharactersPerPage.characters
   );
 
   return (

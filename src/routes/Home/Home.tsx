@@ -1,8 +1,8 @@
-import CharacterDisplay from "../../components/Character/Character";
-import { useGetAllCharactersQuery } from "../../slices/characterApiSlice";
+import CharacterDisplay from "../CharactersDisplay/CharacterDisplay";
+import { useGetCharactersPerPageQuery } from "../../services/characterApi";
 import { useAppDispatch } from "../../globals/hooks";
 import React from "react";
-import { getData } from "../../slices/getCharacterSlice";
+import { setCharactersForPage } from "../../globals/redux/reducers/characterReducer";
 import { Character, Info } from "../../globals/interfaces";
 import { Button } from "@mui/material";
 
@@ -11,10 +11,10 @@ const Home = (): JSX.Element => {
 
   const [pageNumber, setPageNumber] = React.useState(1);
 
-  const { data } = useGetAllCharactersQuery(pageNumber);
+  const { data } = useGetCharactersPerPageQuery(pageNumber);
 
   React.useEffect(() => {
-    dispatch(getData(data as Info<Character[]>));
+    dispatch(setCharactersForPage(data as Info<Character[]>));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
